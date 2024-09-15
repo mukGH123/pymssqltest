@@ -40,16 +40,15 @@ def store_details():
 	st.write(f"DOB: {store_data['dob']}")
 	st.write(f"Salary: {store_data['salary']}")
 	
-	# Pie chart for Male/Female Population
-	st.write('### Employee Gender Salary')
-	labels = ['Gender', 'Salary']
-	sizes = [store_data['gender'], store_data['salary']]
-	colors = ['#ff9999', '#66b3ff']
-	explode = (0.1, 0)  # explode the 1st slice
+	# Pie chart for Gender distribution (for all employees, not just one)
+	st.write('### Gender Distribution in All Employees')
+	gender_counts = df['gender'].value_counts()
+	labels = gender_counts.index
+	sizes = gender_counts.values
+	colors = ['#ff9999', '#66b3ff']  # You can adjust the colors
 	
 	fig1, ax1 = plt.subplots()
-	ax1.pie(sizes, explode=explode, labels=labels, colors=colors, autopct='%1.1f%%',
-	shadow=True, startangle=90)
+	ax1.pie(sizes, labels=labels, colors=colors, autopct='%1.1f%%', shadow=True, startangle=90)
 	ax1.axis('equal')  # Equal aspect ratio ensures that pie is drawn as a circle.
 	
 	st.pyplot(fig1)
