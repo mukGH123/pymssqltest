@@ -20,17 +20,47 @@ def get_data_from_sql():
 
 # Load the data from SQL Server
 df = get_data_from_sql()
+# Format Store IDs (name in your case) to avoid comma separation
+df['name'] = df['name'].astype(str)
 
-st.sidebar.header('Select Employee Name')
-store_name = st.sidebar.selectbox('Employee Name', df['name'].unique())
 
-# Filter data for the selected store
-store_data = df[df['name'] == store_name].iloc[0]
+# Define pages
+def store_details():
+    st.sidebar.header('Select Employee Name')
+    store_name = st.sidebar.selectbox('Employee Name', df['name'].unique())
 
-# Display store attributes
-st.header(f'Employee: {store_name}')
-st.write('### Employee Details')
-st.write(f"Code: {store_data['code']}")
-st.write(f"Gender: {store_data['gender']}")
-st.write(f"DOB: {store_data['dob']}")
-st.write(f"Salary: {store_data['salary']}")
+    # Filter data for the selected store
+    store_data = df[df['name'] == store_name].iloc[0]
+
+    # Display store attributes
+	st.header(f'Employee: {store_name}')
+	st.write('### Employee Details')
+	st.write(f"Code: {store_data['code']}")
+	st.write(f"Gender: {store_data['gender']}")
+	st.write(f"DOB: {store_data['dob']}")
+	st.write(f"Salary: {store_data['salary']}")
+
+
+
+# Create a navigation menu
+st.sidebar.title('Navigation')
+page = st.sidebar.radio('Go to', ['Employee Details', 'Employee Statistics', 'Employee Comparison'])
+
+st.markdown(
+    """
+    <style>
+    [data-testid="stElementToolbar"] {
+        display: none;
+    }
+    </style>
+    """,
+    unsafe_allow_html=True
+)
+
+# Render the selected page
+if page == 'Employee Details':
+    store_details()
+elif page == 'Employee Statistics':
+    store_details()
+elif page == 'Employee Comparison':
+    store_details()
