@@ -67,7 +67,7 @@ def summary_statistics():
 	
 	st.write('### All Employee Summary')
 	# Include all the requested columns in the summary
-	summary = df[['name', 'code', 'gender', 'basic', 'dob', 'salary']].rename(columns=custom_headers)
+	summary = df[['name', 'code', 'gender', 'dob', 'salary']].rename(columns=custom_headers)
 	# Display the DataFrame in the app
 	#st.dataframe(summary)  
 	
