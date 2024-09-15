@@ -13,7 +13,7 @@ def get_data_from_sql():
 		'PWD=MefrAyu!Uw8they9ru;'
 	)
 	
-	query = "SELECT Employee_Name as name, Employee_Code as code, Employee_Gender as gender, Employee_DOB as dob, GrossSalary as salary FROM EmployeeMater"
+	query = "SELECT Employee_Name as name, Employee_Code as code, Employee_Gender as gender, EmployeeTypeId as type, Employee_DOB as dob, GrossSalary as salary FROM EmployeeMater"
 	df = pd.read_sql(query, conn)
 	conn.close()
 	return df
@@ -37,6 +37,7 @@ def store_details():
 	st.write('### Employee Details')
 	st.write(f"Code: {store_data['code']}")
 	st.write(f"Gender: {store_data['gender']}")
+	st.write(f"Type: {store_data['type']}")
 	st.write(f"DOB: {store_data['dob']}")
 	st.write(f"Salary: {store_data['salary']}")
 	
@@ -52,6 +53,22 @@ def store_details():
 	ax1.axis('equal')  # Equal aspect ratio ensures that pie is drawn as a circle.
 	
 	st.pyplot(fig1)
+
+	# Pie chart for Employee Type distribution (for all employees, not just one)
+	st.write('### Employee Type Distribution in All Employees')
+	type_counts = df['type'].value_counts()
+	labels = type_counts.index
+	sizes = type_counts.values
+	colors = ['#ff9999', '#66b3ff']  # You can adjust the colors
+	
+	fig2, ax2 = plt.subplots()
+	ax2.pie(sizes, labels=labels, colors=colors, autopct='%1.1f%%', shadow=True, startangle=90)
+	ax2.axis('equal')  # Equal aspect ratio ensures that pie is drawn as a circle.
+	
+	st.pyplot(fig2)
+
+
+
 
 def summary_statistics():
 	# Define custom headers for the DataFrame
