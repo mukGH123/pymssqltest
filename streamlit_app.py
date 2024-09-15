@@ -26,13 +26,13 @@ df['name'] = df['name'].astype(str)
 
 # Define pages
 def store_details():
-    st.sidebar.header('Select Employee Name')
-    store_name = st.sidebar.selectbox('Employee Name', df['name'].unique())
-
-    # Filter data for the selected store
-    store_data = df[df['name'] == store_name].iloc[0]
-
-    # Display store attributes
+	st.sidebar.header('Select Employee Name')
+	store_name = st.sidebar.selectbox('Employee Name', df['name'].unique())
+	
+	# Filter data for the selected store
+	store_data = df[df['name'] == store_name].iloc[0]
+	
+	# Display store attributes
 	st.header(f'Employee: {store_name}')
 	st.write('### Employee Details')
 	st.write(f"Code: {store_data['code']}")
