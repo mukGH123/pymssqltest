@@ -39,6 +39,7 @@ def store_details():
 	st.write(f"Gender: {store_data['gender']}")
 	st.write(f"DOB: {store_data['dob']}")
 	st.write(f"Salary: {store_data['salary']}")
+	
 	# Pie chart for Male/Female Population
 	st.write('### Employee Gender Salary')
 	labels = ['Gender', 'Salary']
