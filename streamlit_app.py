@@ -53,7 +53,24 @@ def store_details():
 	
 	st.pyplot(fig1)
 
+def summary_statistics():
+    # Define custom headers for the DataFrame
+    custom_headers = {
+        'name': 'Name',
+        'code': 'Code',
+        'gender': 'Gender',
+        'dob': 'DOB',
+        'salary': 'Salary'
+    }
+    #query = "SELECT Employee_Name as name, Employee_Code as code, Employee_Gender as gender, Employee_DOB as dob, GrossSalary as salary FROM EmployeeMater"
+    st.header('Employee Statistics')
 
+    st.write('### All Employee Summary')
+    # Include all the requested columns in the summary
+    summary = df[['name', 'code', 'gender', 'basic', 'dob', 'salary']].rename(columns=custom_headers)
+    # Display the DataFrame in the app
+    st.dataframe(summary)  
+	
 # Create a navigation menu
 st.sidebar.title('Navigation')
 page = st.sidebar.radio('Go to', ['Employee Details', 'Employee Statistics', 'Employee Comparison'])
@@ -73,6 +90,6 @@ st.markdown(
 if page == 'Employee Details':
     store_details()
 elif page == 'Employee Statistics':
-    store_details()
+    summary_statistics()
 elif page == 'Employee Comparison':
     store_details()
