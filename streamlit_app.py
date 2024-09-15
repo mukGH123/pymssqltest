@@ -13,10 +13,21 @@ def get_data_from_sql():
 		'PWD=MefrAyu!Uw8they9ru;'
 	)
 	
-	query = "SELECT Employee_Name, Employee_Code, Employee_Gender, Employee_DOB, GrossSalary FROM EmployeeMater"
+	query = "SELECT Employee_Name as name, Employee_Code as code, Employee_Gender, Employee_DOB, GrossSalary FROM EmployeeMater"
 	df = pd.read_sql(query, conn)
 	conn.close()
 	return df
 
 # Load the data from SQL Server
 df = get_data_from_sql()
+
+st.sidebar.header('Select Employee Name')
+store_name = st.sidebar.selectbox('Employee Name', df['name'].unique())
+
+# Filter data for the selected store
+store_data = df[df['name'] == store_name].iloc[0]
+
+# Display store attributes
+st.header(f'Employee: {store_name}')
+st.write('### Employee Details')
+st.write(f"Code: {store_data['code']}")
