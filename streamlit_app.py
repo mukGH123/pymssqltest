@@ -69,7 +69,7 @@ def summary_statistics():
 	# Include all the requested columns in the summary
 	summary = df[['name', 'code', 'gender', 'dob', 'salary']].rename(columns=custom_headers)
 	# Display the DataFrame in the app
-	#st.dataframe(summary)  
+	st.dataframe(summary)  
 	
 # Create a navigation menu
 st.sidebar.title('Navigation')
