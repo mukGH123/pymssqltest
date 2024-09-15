@@ -39,7 +39,19 @@ def store_details():
 	st.write(f"Gender: {store_data['gender']}")
 	st.write(f"DOB: {store_data['dob']}")
 	st.write(f"Salary: {store_data['salary']}")
+    # Pie chart for Male/Female Population
+    st.write('### Employee Gender Salary')
+    labels = ['Gender', 'Salary']
+    sizes = [store_data['gender'], store_data['salary']]
+    colors = ['#ff9999', '#66b3ff']
+    explode = (0.1, 0)  # explode the 1st slice
 
+    fig1, ax1 = plt.subplots()
+    ax1.pie(sizes, explode=explode, labels=labels, colors=colors, autopct='%1.1f%%',
+            shadow=True, startangle=90)
+    ax1.axis('equal')  # Equal aspect ratio ensures that pie is drawn as a circle.
+
+    st.pyplot(fig1)
 
 
 # Create a navigation menu
